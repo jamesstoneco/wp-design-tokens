@@ -1,0 +1,60 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2019-09-09T10:40:59+02:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.2.0\n"
+
+#: admin.js:7985
+msgid "Remove"
+msgstr ""
+
+#: admin.js:8044
+msgid "Todo list"
+msgstr ""
+
+#: admin.js:8044
+msgid "This section demonstrates a mobx-state-tree Todo list (no peristence to server)."
+msgstr ""
+
+#: admin.js:8049
+msgid "What needs to be done?"
+msgstr ""
+
+#: admin.js:8054
+msgid "Add"
+msgstr ""
+
+#: admin.js:8153
+msgid "The text domain of the plugin is: %(textDomain)s (localized variable)"
+msgstr ""
+
+#: admin.js:8157
+msgid "The WP REST API URL of the plugin is: {{a}}%(restUrl)s{{/a}} (localized variable)"
+msgstr ""
+
+#: admin.js:8166
+msgid "The is an informative notice"
+msgstr ""
+
+#: admin.js:8168
+msgid "Your action was successful"
+msgstr ""
+
+#: admin.js:8170
+msgid "An unexpected error has occurred"
+msgstr ""
+
+#: widget.js:7780
+msgid "Hello, World!"
+msgstr ""
+
+#: widget.js:7780
+msgid "I got generated from your new plugin!"
+msgstr ""

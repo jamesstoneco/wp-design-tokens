@@ -1,0 +1,8 @@
+{
+    "recommendations": [
+        "esbenp.prettier-vscode",
+        "eg2.tslint",
+        "felixfbecker.php-intellisense",
+        "mrorz.language-gettext"
+    ]
+}
