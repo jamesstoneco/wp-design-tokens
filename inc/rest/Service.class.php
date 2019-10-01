@@ -24,6 +24,21 @@ class Service extends base\Base {
             'methods' => 'GET',
             'callback' => [$this, 'routePlugin']
         ]);
+        register_rest_route(Service::SERVICE_NAMESPACE, '/test', [
+            'methods' => 'GET',
+            'callback' => [$this, 'routeTest']
+        ]);
+        register_rest_route(Service::SERVICE_NAMESPACE, '/colors', [
+            'methods' => 'GET',
+            'callback' => [$this, 'routeColors']
+        ]);
+        register_rest_route(Service::SERVICE_NAMESPACE, '/colors/add', [
+            'methods' => 'POST',
+            'callback' => [$this, 'routeColorsAdd']
+            // 'permission_callback' => function () {
+            //     return current_user_can('edit_posts'); // JMS - this requires a user security cookie
+            // }
+        ]);
     }
 
     /**
@@ -52,6 +67,25 @@ class Service extends base\Base {
      */
     public function routePlugin() {
         return new \WP_REST_Response(general\Core::getInstance()->getPluginData());
+    }
+
+    public function routeTest() {
+        return new \WP_REST_Response('TEST');
+    }
+
+    public function routeColors() {
+        $data = array(
+            array('name' => 'programmer red', 'color' => 'ff0000'),
+            array('name' => 'bad cat', 'color' => 'badca7')
+        );
+        return new \WP_REST_Response($data);
+    }
+
+    public function routeColorsAdd($request_data) {
+        $parameters = $request_data->get_params();
+        $body = $request_data->get_body();
+        $data = array('response' => 'success', 'request_json' => json_decode($body));
+        return new \WP_REST_Response($data);
     }
 
     /**
