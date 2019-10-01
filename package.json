@@ -48,6 +48,7 @@
         "prettier-write": "prettier --write 'inc/**/*.php' '*.php' && prettier --write 'public/src/**/*.tsx'",
         "test": "yarn --silent test-e2e",
         "test-e2e": "cypress run",
+        "test-e2e-debug": "cypress open",
         "//     CI    //": "--",
         "docker-ci-image-build": "./docker/scripts/build-ci-image.sh",
         "docker-ci-image-push": "./docker/scripts/push-ci-image.sh",
