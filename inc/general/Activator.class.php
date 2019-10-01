@@ -12,8 +12,21 @@ class Activator extends base\Base {
     /**
      * Method gets fired when the user activates the plugin.
      */
+
     public function activate() {
         // Your implementation...
+        // global $wpdb;
+        // $charset_collate = $wpdb->get_charset_collate();
+        // $sql = "CREATE TABLE ${Activator::TABLE_NAME} (
+        //     id mediumint(9) NOT NULL AUTO_INCREMENT,
+        //     color_name varchar(55) NOT NULL,
+        //     color_hex varchar(6) NOT NULL,
+        //     UNIQUE KEY id (id)
+        // ) $charset_collate;";
+        // if (!function_exists('dbDelta')) {
+        //     require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+        // }
+        // dbDelta($sql);
     }
 
     /**
@@ -47,16 +60,18 @@ class Activator extends base\Base {
         // Table wp_wprjss
         if ($installThisCallable === null) {
             // Your table installation here...
-            $table_name = $this->getTableName();
-            /*$sql = "CREATE TABLE $table_name (
-    			id mediumint(9) NOT NULL AUTO_INCREMENT,
-    			UNIQUE KEY id (id)
+            $table_name = $this->getTableName('colors');
+            $sql = "CREATE TABLE $table_name (
+                id mediumint(9) NOT NULL AUTO_INCREMENT,
+                color_name varchar(55) NOT NULL,
+                color_hex varchar(6) NOT NULL,
+                UNIQUE KEY id (id)
     		) $charset_collate;";
-    		dbDelta( $sql );
-    		
-    		if ($errorlevel) {
-    			$wpdb->print_error();
-    		}*/
+            dbDelta($sql);
+
+            if ($errorlevel) {
+                $wpdb->print_error();
+            }
         } else {
             call_user_func($installThisCallable);
         }

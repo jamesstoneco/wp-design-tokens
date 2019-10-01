@@ -15,6 +15,8 @@ class Service extends base\Base {
      * @see getUrl()
      */
     const SERVICE_NAMESPACE = 'wprjss/v1';
+    const TABLE_NAMESPACE = 'wprjss';
+    const TABLE_NAME = 'wprjss_colors';
 
     /**
      * Register endpoints.
@@ -36,7 +38,7 @@ class Service extends base\Base {
             'methods' => 'POST',
             'callback' => [$this, 'routeColorsAdd']
             // 'permission_callback' => function () {
-            //     return current_user_can('edit_posts'); // JMS - this requires a user security cookie
+            //     return current_user_can('administrator'); // JMS - this requires a user security cookie
             // }
         ]);
     }
@@ -53,7 +55,7 @@ class Service extends base\Base {
      *     WC tested up to: "",
      *     Name: "WP ReactJS Starter",
      *     PluginURI: "https://matthias-web.com/wordpress",
-     *     Version: "0.1.0",
+     *     Version: "1.0.0",
      *     Description: "This WordPress plugin demonstrates how to setup a plugin that uses React and ES6 in a WordPress plugin. <cite>By <a href="https://matthias-web.com">Matthias Guenter</a>.</cite>",
      *     Author: "<a href="https://matthias-web.com">Matthias Guenter</a>",
      *     AuthorURI: "https://matthias-web.com",
@@ -63,28 +65,71 @@ class Service extends base\Base {
      *     Title: "<a href="https://matthias-web.com/wordpress">WP ReactJS Starter</a>",
      *     AuthorName: "Matthias Guenter"
      * }
-     * @apiVersion 0.1.0
      */
     public function routePlugin() {
         return new \WP_REST_Response(general\Core::getInstance()->getPluginData());
     }
 
+    /**
+     * @api {get} /wprjss/v1/test Test
+     * @apiHeader {string} X-WP-Nonce
+     * @apiName Test
+     * @apiGroup Test
+     *
+     * @apiSuccessExample {text} Success-Response:
+     * TEST
+     */
+
     public function routeTest() {
         return new \WP_REST_Response('TEST');
     }
+
+    /**
+     * @api {get} /wprjss/v1/colors Get Colors
+     * @apiHeader {string} X-WP-Nonce
+     * @apiName GetColor
+     * @apiGroup Color
+     *
+     */
 
     public function routeColors() {
         $data = array(
             array('name' => 'programmer red', 'color' => 'ff0000'),
             array('name' => 'bad cat', 'color' => 'badca7')
         );
-        return new \WP_REST_Response($data);
+        global $wpdb;
+        $table_name = $this->getTableName('colors');
+        $query = 'SELECT * from ' . $table_name;
+        $results = $wpdb->get_results($query, OBJECT);
+        // $results = $wpdb->get_results('SELECT * FROM ' . $wpdb->prefix . 'posts LIMIT 10');
+        return new \WP_REST_Response($results);
     }
 
+    /**
+     * @api {get} /wprjss/v1/colors/add Add Color
+     * @apiHeader {string} X-WP-Nonce
+     * @apiName AddColor
+     * @apiGroup Color
+     *
+     */
+
     public function routeColorsAdd($request_data) {
+        global $wpdb;
         $parameters = $request_data->get_params();
         $body = $request_data->get_body();
-        $data = array('response' => 'success', 'request_json' => json_decode($body));
+        $table_name = $this->getTableName('colors');
+        $data_to_insert = json_decode($body, true); // true because we want an associative array
+        $fake_data = array(
+            'color_name' => 'turn that off',
+            'color_hex' => '0ff0ff'
+        );
+        $format = array('%s', '%s');
+        $results = $wpdb->insert($table_name, $data_to_insert);
+        $new_id = $wpdb->insert_id;
+        $data = array(
+            'response' => 'success',
+            'id' => $new_id
+        );
         return new \WP_REST_Response($data);
     }
 
