@@ -70,7 +70,7 @@
     "dependencies": {
         "@wordpress/i18n": "^3.5.0",
         "i18n-calypso": "^3.0.0",
-        "jquery": "^3.4.1",
+        "jquery": "^3.5.0",
         "lil-uri": "^0.2.2",
         "mobx": "^4.9.4",
         "mobx-react": "^6.1.3",
