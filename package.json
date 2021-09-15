@@ -139,7 +139,7 @@
         "webpack-cli": "^3.3.2",
         "webpackbar": "^3.2.0",
         "wp-hookdoc": "^0.2.0",
-        "set-value": "^2.0.1",
+        "set-value": "^4.0.1",
         "js-yaml": "^3.13.1"
     }
 }
